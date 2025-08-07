@@ -162,21 +162,174 @@ echo -e "${GREEN}✅ PM2 配置完成${NC}"
 
 # 配置 Nginx
 print_step "配置 Nginx"
-if [ -f "../my.conf" ]; then
-    sudo cp "../my.conf" "$NGINX_CONFIG_PATH"
-    echo -e "${GREEN}✅ Nginx 配置文件已复制${NC}"
+
+# 检测操作系统类型
+if [ -f /etc/redhat-release ]; then
+    NGINX_USER="nginx"
+    NGINX_SITES_PATH="/etc/nginx/conf.d"
+    NGINX_CONFIG_FILE="${NGINX_SITES_PATH}/${PROJECT_NAME}.conf"
+elif [ -f /etc/debian_version ]; then
+    NGINX_USER="www-data"
+    NGINX_SITES_PATH="/etc/nginx/sites-available"
+    NGINX_CONFIG_FILE="${NGINX_SITES_PATH}/${PROJECT_NAME}"
 else
-    echo -e "${YELLOW}⚠️  Nginx 配置文件不存在，请手动配置${NC}"
+    NGINX_USER="nginx"
+    NGINX_SITES_PATH="/etc/nginx/conf.d"
+    NGINX_CONFIG_FILE="${NGINX_SITES_PATH}/${PROJECT_NAME}.conf"
+fi
+
+echo -e "${YELLOW}检测到系统类型，使用用户: ${NGINX_USER}${NC}"
+
+# 查找配置文件
+NGINX_SOURCE_CONFIG=""
+if [ -f "my.conf" ]; then
+    NGINX_SOURCE_CONFIG="my.conf"
+elif [ -f "../my.conf" ]; then
+    NGINX_SOURCE_CONFIG="../my.conf"
+elif [ -f "/Users/yinhaowei/Library/Containers/com.termius.mac/Data/tmp/tmp-70555-1ps38jjxlP2h/my.conf" ]; then
+    NGINX_SOURCE_CONFIG="/Users/yinhaowei/Library/Containers/com.termius.mac/Data/tmp/tmp-70555-1ps38jjxlP2h/my.conf"
+fi
+
+if [ -n "$NGINX_SOURCE_CONFIG" ]; then
+    sudo cp "$NGINX_SOURCE_CONFIG" "$NGINX_CONFIG_FILE"
+    echo -e "${GREEN}✅ Nginx 配置文件已复制到: $NGINX_CONFIG_FILE${NC}"
+else
+    echo -e "${YELLOW}⚠️  Nginx 配置文件不存在，创建默认配置...${NC}"
+    # 创建默认的 Nginx 配置
+    sudo tee "$NGINX_CONFIG_FILE" > /dev/null << 'EOF'
+# Next.js 应用反向代理配置
+upstream nextjs_backend {
+    server 127.0.0.1:3000;
+    keepalive 32;
+}
+
+# 静态资源缓存配置
+proxy_cache_path /var/cache/nginx/nextjs levels=1:2 keys_zone=nextjs_static:10m inactive=60m use_temp_path=off;
+
+server {
+    listen 80;
+    server_name www.yinhaowei.my;
+
+    # 基础安全配置
+    server_tokens off;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # 启用 gzip 压缩
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        text/javascript
+        application/json
+        application/javascript
+        application/xml+rss
+        application/atom+xml
+        image/svg+xml;
+
+    # Next.js 静态资源缓存
+    location /_next/static/ {
+        proxy_cache nextjs_static;
+        proxy_cache_valid 200 302 60m;
+        proxy_cache_valid 404 1m;
+        
+        proxy_pass http://nextjs_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # 公共静态资源
+    location ~* \.(ico|css|js|gif|jpe?g|png|svg|woff2?|ttf|eot)$ {
+        proxy_pass http://nextjs_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    # API 路由和动态内容
+    location /api/ {
+        proxy_pass http://nextjs_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+        
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        expires 0;
+    }
+
+    # 主应用路由
+    location / {
+        proxy_pass http://nextjs_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+        
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # 安全配置：禁止访问隐藏文件
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # 健康检查端点
+    location /health {
+        proxy_pass http://nextjs_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        access_log off;
+    }
+}
+EOF
+    echo -e "${GREEN}✅ 默认 Nginx 配置已创建${NC}"
 fi
 
 # 创建缓存目录
 sudo mkdir -p /var/cache/nginx/nextjs
-sudo chown -R www-data:www-data /var/cache/nginx/nextjs
+sudo chown -R ${NGINX_USER}:${NGINX_USER} /var/cache/nginx/nextjs
 
-# 启用网站
-if [ ! -L "/etc/nginx/sites-enabled/${PROJECT_NAME}" ]; then
-    sudo ln -s "$NGINX_CONFIG_PATH" "/etc/nginx/sites-enabled/${PROJECT_NAME}"
+# 启用网站 (仅适用于 Debian/Ubuntu)
+if [ -f /etc/debian_version ] && [ ! -L "/etc/nginx/sites-enabled/${PROJECT_NAME}" ]; then
+    sudo ln -s "$NGINX_CONFIG_FILE" "/etc/nginx/sites-enabled/${PROJECT_NAME}"
     echo -e "${GREEN}✅ Nginx 网站已启用${NC}"
+elif [ -f /etc/redhat-release ]; then
+    echo -e "${GREEN}✅ CentOS/RHEL 系统，配置文件已直接放置在 conf.d 目录${NC}"
 fi
 
 # 测试 Nginx 配置
