@@ -1,0 +1,55 @@
+# 依赖
+node_modules
+npm-debug.log*
+
+# 构建产物
+.next
+out
+dist
+
+# 环境变量
+.env
+.env.local
+.env.production.local
+.env.staging.local
+
+# 调试日志
+*.log
+
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 覆盖率目录
+coverage
+
+# 编辑器文件
+.vscode
+.idea
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# README
+README.md
+
+# Docker
+Dockerfile
+.dockerignore
+
+# 测试
+__tests__
+**/*.test.js
+**/*.test.ts
+**/*.test.tsx
+
+# Storybook
+.storybook
+storybook-static 

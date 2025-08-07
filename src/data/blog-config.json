@@ -1,0 +1,112 @@
+{
+  "posts": [
+    {
+      "id": "nextjs-15-features",
+      "title": "Next.js 15 新特性深度解析",
+      "description": "探索 Next.js 15 带来的革命性变化，包括 App Router 的优化、服务端组件的增强、Turbopack 的稳定性提升等新特性。本文将深入分析这些特性如何提升开发体验和应用性能。",
+      "date": "2024-01-15",
+      "category": "技术分享",
+      "tags": ["Next.js", "React", "前端开发", "性能优化"],
+      "author": "殷浩玮",
+      "readTime": 8,
+      "coverImage": "/images/nextjs-15.jpg",
+      "markdownFile": "nextjs-15-features.md",
+      "featured": true,
+      "published": true
+    },
+    {
+      "id": "typescript-best-practices",
+      "title": "TypeScript 最佳实践指南",
+      "description": "分享在实际项目中总结的 TypeScript 最佳实践，包括类型设计、泛型使用、错误处理等方面的经验，帮助你写出更好的类型安全代码。",
+      "date": "2024-01-10",
+      "category": "学习笔记",
+      "tags": ["TypeScript", "JavaScript", "最佳实践", "代码质量"],
+      "author": "殷浩玮",
+      "readTime": 12,
+      "coverImage": "/images/typescript-guide.jpg",
+      "markdownFile": "typescript-best-practices.md",
+      "featured": false,
+      "published": true
+    },
+    {
+      "id": "ai-development-trends",
+      "title": "2024年AI开发趋势观察",
+      "description": "回顾2024年人工智能领域的重大突破，分析大语言模型、多模态AI、Agent等技术的发展趋势，展望AI技术在各行业的应用前景。",
+      "date": "2024-01-05",
+      "category": "行业观察",
+      "tags": ["人工智能", "机器学习", "技术趋势", "LLM"],
+      "author": "殷浩玮",
+      "readTime": 15,
+      "coverImage": "/images/ai-trends.jpg",
+      "externalUrl": "https://example.com/ai-trends-2024",
+      "featured": true,
+      "published": true
+    },
+    {
+      "id": "react-performance-optimization",
+      "title": "React 性能优化实战指南",
+      "description": "深入探讨 React 应用的性能优化策略，包括组件优化、状态管理、代码分割、懒加载等技术，通过实际案例展示优化效果。",
+      "date": "2023-12-28",
+      "category": "技术分享",
+      "tags": ["React", "性能优化", "前端开发", "用户体验"],
+      "author": "殷浩玮",
+      "readTime": 10,
+      "coverImage": "/images/react-performance.jpg",
+      "markdownFile": "react-performance-optimization.md",
+      "featured": false,
+      "published": true
+    },
+    {
+      "id": "data-analysis-python",
+      "title": "Python数据分析从入门到实战",
+      "description": "系统介绍使用 Python 进行数据分析的完整流程，涵盖数据获取、清洗、分析、可视化等各个环节，适合数据分析初学者。",
+      "date": "2023-12-20",
+      "category": "数据分析",
+      "tags": ["Python", "数据分析", "Pandas", "数据可视化"],
+      "author": "殷浩玮",
+      "readTime": 20,
+      "coverImage": "/images/python-data-analysis.jpg",
+      "externalUrl": "https://example.com/python-data-analysis-guide",
+      "featured": false,
+      "published": true
+    },
+    {
+      "id": "web3-development-intro",
+      "title": "Web3开发入门：从区块链到DApp",
+      "description": "介绍Web3开发的基础概念，包括区块链技术、智能合约、去中心化应用(DApp)开发等，为想要进入Web3领域的开发者提供指导。",
+      "date": "2023-12-15",
+      "category": "新技术",
+      "tags": ["Web3", "区块链", "智能合约", "DApp"],
+      "author": "殷浩玮",
+      "readTime": 18,
+      "coverImage": "/images/web3-development.jpg",
+      "markdownFile": "web3-development-intro.md",
+      "featured": false,
+      "published": true
+    }
+  ],
+  "categories": [
+    "技术分享",
+    "学习笔记",
+    "行业观察",
+    "数据分析",
+    "新技术",
+    "生活感悟"
+  ],
+  "tags": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "JavaScript",
+    "前端开发",
+    "性能优化",
+    "人工智能",
+    "机器学习",
+    "Python",
+    "数据分析",
+    "Web3",
+    "区块链",
+    "最佳实践",
+    "技术趋势"
+  ]
+} 

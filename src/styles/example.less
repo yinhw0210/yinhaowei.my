@@ -1,0 +1,84 @@
+// Example Less file demonstrating usage with TailwindCSS
+// You can import this in your components like: import styles from '@/styles/example.less'
+
+@primary-color: #3b82f6;
+@secondary-color: #64748b;
+@border-radius: 8px;
+@transition-duration: 0.3s;
+
+.example-component {
+  background-color: @primary-color;
+  border-radius: @border-radius;
+  transition: all @transition-duration ease;
+  
+  &:hover {
+    background-color: darken(@primary-color, 10%);
+    transform: translateY(-2px);
+  }
+  
+  .title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    
+    // You can still use Tailwind classes alongside Less
+    // Just apply them directly in your JSX
+  }
+  
+  .content {
+    color: lighten(@secondary-color, 20%);
+    line-height: 1.6;
+    
+    p {
+      margin-bottom: 0.75rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Mixins for reusable styles
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-base() {
+  padding: 0.75rem 1.5rem;
+  border-radius: @border-radius;
+  font-weight: 500;
+  transition: all @transition-duration ease;
+  cursor: pointer;
+  border: none;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(@primary-color, 0.3);
+  }
+}
+
+.primary-button {
+  .button-base();
+  background-color: @primary-color;
+  color: white;
+  
+  &:hover {
+    background-color: darken(@primary-color, 8%);
+  }
+}
+
+.secondary-button {
+  .button-base();
+  background-color: transparent;
+  color: @secondary-color;
+  border: 2px solid @secondary-color;
+  
+  &:hover {
+    background-color: @secondary-color;
+    color: white;
+  }
+} 
