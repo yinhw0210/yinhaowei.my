@@ -120,26 +120,54 @@ echo -e "${GREEN}✅ 项目构建完成${NC}"
 
 # 配置 PM2
 print_step "配置 PM2 进程管理"
+
+# 完全停止并清理现有应用
+if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
+    echo -e "${YELLOW}停止并清理现有应用...${NC}"
+    pm2 stop "$PM2_APP_NAME" 2>/dev/null || true
+    pm2 delete "$PM2_APP_NAME" 2>/dev/null || true
+fi
+
+# 等待进程完全停止
+sleep 3
+
+# 检查是否使用 standalone 模式
+if [ -f ".next/standalone/server.js" ]; then
+    echo -e "${YELLOW}检测到 standalone 模式，使用 server.js${NC}"
+    SERVER_SCRIPT=".next/standalone/server.js"
+    SERVER_ARGS=""
+else
+    echo -e "${YELLOW}使用标准模式，使用 npm start${NC}"
+    SERVER_SCRIPT="npm"
+    SERVER_ARGS="start"
+fi
+
+# 创建优化的 PM2 配置（单实例模式，避免端口冲突）
 cat > ecosystem.config.js << EOF
 module.exports = {
   apps: [
     {
       name: '${PM2_APP_NAME}',
-      script: 'npm',
-      args: 'start',
+      script: '${SERVER_SCRIPT}',
+      args: '${SERVER_ARGS}',
       cwd: '${SERVER_PATH}',
-      instances: 'max',
-      exec_mode: 'cluster',
+      instances: 1,
+      exec_mode: 'fork',
       env: {
         NODE_ENV: '${ENVIRONMENT}',
-        PORT: 3000
+        PORT: 3000,
+        HOSTNAME: '0.0.0.0'
       },
       error_file: '${SERVER_PATH}/logs/err.log',
       out_file: '${SERVER_PATH}/logs/out.log',
       log_file: '${SERVER_PATH}/logs/combined.log',
       time: true,
-      max_memory_restart: '1G',
-      node_args: '--max-old-space-size=1024'
+      max_memory_restart: '800M',
+      node_args: '--max-old-space-size=1024',
+      autorestart: true,
+      watch: false,
+      max_restarts: 10,
+      min_uptime: '10s'
     }
   ]
 };
@@ -148,16 +176,23 @@ EOF
 # 创建日志目录
 mkdir -p logs
 
-# 停止现有应用
-if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
-    echo -e "${YELLOW}停止现有应用...${NC}"
-    pm2 stop "$PM2_APP_NAME"
-    pm2 delete "$PM2_APP_NAME"
-fi
-
 # 启动应用
+echo -e "${YELLOW}启动 Next.js 应用...${NC}"
 pm2 start ecosystem.config.js
 pm2 save
+
+# 等待应用启动
+sleep 5
+
+# 检查应用状态
+if pm2 describe "$PM2_APP_NAME" | grep -q "online"; then
+    echo -e "${GREEN}✅ PM2 应用启动成功${NC}"
+else
+    echo -e "${RED}❌ PM2 应用启动失败，查看日志...${NC}"
+    pm2 logs "$PM2_APP_NAME" --lines 10
+    exit 1
+fi
+
 echo -e "${GREEN}✅ PM2 配置完成${NC}"
 
 # 配置 Nginx
@@ -180,6 +215,28 @@ fi
 
 echo -e "${YELLOW}检测到系统类型，使用用户: ${NGINX_USER}${NC}"
 
+# 清理可能冲突的旧配置文件
+echo -e "${YELLOW}清理旧的 Nginx 配置文件...${NC}"
+sudo find /etc/nginx -name "*yinhaowei*" -type f 2>/dev/null | while read file; do
+    echo "删除旧配置: $file"
+    sudo rm -f "$file"
+done
+
+# 确保删除所有可能的旧配置文件
+sudo rm -f /etc/nginx/conf.d/yinhaowei.my.conf
+sudo rm -f /etc/nginx/conf.d/yinhaowei-my.conf
+sudo rm -f /etc/nginx/sites-available/yinhaowei.my
+sudo rm -f /etc/nginx/sites-enabled/yinhaowei.my
+
+# 检查是否还有引用旧 upstream 的文件
+if sudo grep -r "nextjs_backend" /etc/nginx/ 2>/dev/null; then
+    echo -e "${RED}警告: 发现旧的 upstream 引用，正在清理...${NC}"
+    sudo grep -rl "nextjs_backend" /etc/nginx/ 2>/dev/null | while read file; do
+        echo "清理文件中的旧引用: $file"
+        sudo sed -i 's/nextjs_backend/nextjs_app_backend/g' "$file"
+    done
+fi
+
 # 查找配置文件
 NGINX_SOURCE_CONFIG=""
 if [ -f "my.conf" ]; then
@@ -198,13 +255,13 @@ else
     # 创建默认的 Nginx 配置
     sudo tee "$NGINX_CONFIG_FILE" > /dev/null << 'EOF'
 # Next.js 应用反向代理配置
-upstream nextjs_backend {
+upstream nextjs_app_backend {
     server 127.0.0.1:3000;
     keepalive 32;
 }
 
 # 静态资源缓存配置
-proxy_cache_path /var/cache/nginx/nextjs levels=1:2 keys_zone=nextjs_static:10m inactive=60m use_temp_path=off;
+proxy_cache_path /var/cache/nginx/nextjs_app levels=1:2 keys_zone=nextjs_app_cache:10m inactive=60m use_temp_path=off;
 
 server {
     listen 80;
@@ -235,11 +292,11 @@ server {
 
     # Next.js 静态资源缓存
     location /_next/static/ {
-        proxy_cache nextjs_static;
+        proxy_cache nextjs_app_cache;
         proxy_cache_valid 200 302 60m;
         proxy_cache_valid 404 1m;
         
-        proxy_pass http://nextjs_backend;
+        proxy_pass http://nextjs_app_backend;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -255,7 +312,7 @@ server {
 
     # 公共静态资源
     location ~* \.(ico|css|js|gif|jpe?g|png|svg|woff2?|ttf|eot)$ {
-        proxy_pass http://nextjs_backend;
+        proxy_pass http://nextjs_app_backend;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -268,7 +325,7 @@ server {
 
     # API 路由和动态内容
     location /api/ {
-        proxy_pass http://nextjs_backend;
+        proxy_pass http://nextjs_app_backend;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -285,7 +342,7 @@ server {
 
     # 主应用路由
     location / {
-        proxy_pass http://nextjs_backend;
+        proxy_pass http://nextjs_app_backend;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -310,7 +367,7 @@ server {
 
     # 健康检查端点
     location /health {
-        proxy_pass http://nextjs_backend;
+        proxy_pass http://nextjs_app_backend;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         access_log off;
@@ -321,8 +378,8 @@ EOF
 fi
 
 # 创建缓存目录
-sudo mkdir -p /var/cache/nginx/nextjs
-sudo chown -R ${NGINX_USER}:${NGINX_USER} /var/cache/nginx/nextjs
+sudo mkdir -p /var/cache/nginx/nextjs_app
+sudo chown -R ${NGINX_USER}:${NGINX_USER} /var/cache/nginx/nextjs_app
 
 # 启用网站 (仅适用于 Debian/Ubuntu)
 if [ -f /etc/debian_version ] && [ ! -L "/etc/nginx/sites-enabled/${PROJECT_NAME}" ]; then
