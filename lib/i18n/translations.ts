@@ -11,7 +11,7 @@ export const translations = {
     // Hero Section
     hero: {
       welcome: "Welcome to my personal blog",
-      title: "AI Full-Stack Developer",
+      title: "Unfocused Candidate",
       subtitle: "Passionate about technology, focused on full-stack development and technical practice,",
       subtitle2: "creating value with code, recording every step of growth.",
       viewProjects: "View Projects",
@@ -76,7 +76,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      brand: "AI Full-Stack Dev",
+      brand: "Unfocused Candidate",
       brandDescription: "Full-stack developer, focused on technical practice, creating value with code, changing life with technology.",
       quickNav: "Quick Navigation",
       contactInfo: "Contact",
@@ -87,7 +87,7 @@ export const translations = {
     // About Page
     about: {
       tag: "About Me",
-      title: "AI Full-Stack Developer",
+      title: "Unfocused Candidate",
       description: "Passionate about technology, focused on full-stack development and technical practice. Believe that good code not only solves problems but also creates value. Always maintain enthusiasm for learning, changing life with technology.",
       location: "Jinan, Shandong",
       personalInfo: "Full-stack developer, passionate about exploring new technologies, love turning ideas into real products. In spare time, enjoy researching open source projects and sharing technical insights.",
@@ -151,10 +151,10 @@ export const translations = {
       readMore: "Read More",
       noArticles: "No articles yet, stay tuned...",
       articlesList: [
-        { title: "How to Use Python for Image Processing", description: "This article introduces the basics of image processing with Python, including PIL/Pillow library usage, common image operations and practical cases.", readTime: "5 min" },
-        { title: "Browser Extension Development Guide", description: "Learn Chrome browser extension development from scratch, including manifest.json configuration, content scripts, background scripts and other core concepts.", readTime: "8 min" },
-        { title: "Data Analysis and Statistical Algorithms", description: "Explore how to use Python for data analysis, introducing common statistical algorithms and data visualization techniques.", readTime: "10 min" },
-        { title: "Java HTTP Client Development", description: "Detailed introduction to HTTP request implementation in Java, including HttpURLConnection, HttpClient and third-party libraries.", readTime: "7 min" },
+        { title: "Remove Doubao AI Image Watermarks with Open Source Plugin + Python Script", description: "Reverse engineer Doubao API to get 2048x2048 watermark-free HD images. Two solutions: browser extension and Python script for different use cases.", readTime: "8 min" },
+        { title: "Build High-Performance React-Playground with Monaco and Babel", description: "Share how to build a React online editor using Monaco Editor for code editing, Babel for real-time JSX compilation, with local file imports and sandboxed preview.", readTime: "10 min" },
+        { title: "MasterGo AI Generate Design and Code", description: "Introduce MasterGo's AI design and code generation tool. Quickly generate page designs and frontend code from sketches and text descriptions.", readTime: "5 min" },
+        { title: "Drawing Flying Lines with Shaders in Three.js", description: "Detailed guide on implementing flying line effects in Three.js, including track lines and dynamic lines using Bezier curves and shaders for smooth animations.", readTime: "12 min" },
       ],
     },
     // Contact Page
@@ -194,7 +194,7 @@ export const translations = {
     // Hero Section
     hero: {
       welcome: "欢迎来到我的个人博客",
-      title: "AI全栈开发工程师",
+      title: "缺乏专注的竞选者",
       subtitle: "热爱技术，专注于全栈开发与技术实践，",
       subtitle2: "用代码创造价值，记录成长的点滴。",
       viewProjects: "查看项目作品",
@@ -259,7 +259,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      brand: "AI全栈开发",
+      brand: "缺乏专注的竞选者",
       brandDescription: "全栈开发工程师，专注于技术实践，用代码创造价值，用技术改变生活。",
       quickNav: "快速导航",
       contactInfo: "联系方式",
@@ -270,7 +270,7 @@ export const translations = {
     // About Page
     about: {
       tag: "关于我",
-      title: "AI全栈开发工程师",
+      title: "缺乏专注的竞选者",
       description: "热爱技术，专注于全栈开发与技术实践。相信好的代码不仅能解决问题，更能创造价值。始终保持学习的热情，用技术改变生活。",
       location: "山东济南",
       personalInfo: "全栈开发工程师，热衷于探索新技术，喜欢将想法转化为实际的产品。业余时间喜欢研究开源项目，分享技术心得。",
@@ -334,10 +334,10 @@ export const translations = {
       readMore: "阅读全文",
       noArticles: "暂无文章，敬请期待...",
       articlesList: [
-        { title: "如何使用 Python 进行图像处理", description: "本文介绍了使用 Python 进行图像处理的基础知识，包括 PIL/Pillow 库的使用、常见图像操作以及实际应用案例。", readTime: "5 分钟" },
-        { title: "浏览器插件开发入门指南", description: "从零开始学习 Chrome 浏览器插件开发，包括 manifest.json 配置、content scripts、background scripts 等核心概念。", readTime: "8 分钟" },
-        { title: "数据分析与统计学算法实践", description: "探讨如何使用 Python 进行数据分析，介绍常用的统计学算法和数据可视化技术。", readTime: "10 分钟" },
-        { title: "Java HTTP 客户端开发实战", description: "详细介绍 Java 中 HTTP 请求的实现方式，包括 HttpURLConnection、HttpClient 以及第三方库的使用。", readTime: "7 分钟" },
+        { title: "豆包生图有水印？开源插件 + Python 脚本帮你一键搞定", description: "通过逆向分析豆包 API 响应，实现一键获取 AI 生成图片的 2048x2048 无水印高清原图。提供浏览器插件和 Python 脚本两种方案，满足不同使用场景。", readTime: "8 分钟" },
+        { title: "如何用 Monaco 和 Babel 打造高性能 React-Playground", description: "分享如何实现一个 React 在线编辑器，使用 Monaco Editor 作为代码编辑器，Babel 进行 JSX 实时编译，支持本地文件引入和沙箱化预览。", readTime: "10 分钟" },
+        { title: "MasterGo AI 生成设计图及代码", description: "介绍蓝湖 MasterGo 的 AI 生成设计图和代码工具，通过手绘图和文字描述快速生成页面设计和前端代码，解决无原型、无设计图的开发需求。", readTime: "5 分钟" },
+        { title: "Three.js 中使用着色器绘制飞线", description: "详细讲解 Three.js 实现飞线效果的最佳实践，包括底线（轨道线）和飞线（动态线）的绘制，使用贝塞尔曲线和着色器实现流畅的飞线动画。", readTime: "12 分钟" },
       ],
     },
     // Contact Page
