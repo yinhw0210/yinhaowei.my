@@ -6,52 +6,54 @@ import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-
-const contactMethods = [
-  {
-    icon: Github,
-    title: "GitHub",
-    value: "yinhw0210",
-    href: "https://github.com/yinhw0210",
-    description: "查看我的开源项目和代码",
-    color: "from-gray-600 to-gray-800",
-  },
-  {
-    icon: Mail,
-    title: "邮箱",
-    value: "solivix@163.com",
-    href: "mailto:solivix@163.com",
-    description: "发送邮件与我联系",
-    color: "from-blue-500 to-cyan-500",
-    copyable: true,
-  },
-  {
-    icon: MessageCircle,
-    title: "微信",
-    value: "yhw734058719",
-    description: "添加微信好友交流",
-    color: "from-green-500 to-emerald-500",
-    copyable: true,
-  },
-];
+import { useI18n } from "@/lib/i18n";
 
 export function ContactContent() {
   const { toast } = useToast();
+  const { t } = useI18n();
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const contactMethods = [
+    {
+      icon: Github,
+      title: t.contact.github.title,
+      value: "yinhw0210",
+      href: "https://github.com/yinhw0210",
+      description: t.contact.github.description,
+      color: "from-gray-600 to-gray-800",
+    },
+    {
+      icon: Mail,
+      title: t.contact.email.title,
+      value: "solivix@163.com",
+      href: "mailto:solivix@163.com",
+      description: t.contact.email.description,
+      color: "from-blue-500 to-cyan-500",
+      copyable: true,
+    },
+    {
+      icon: MessageCircle,
+      title: t.contact.wechat.title,
+      value: "yhw734058719",
+      description: t.contact.wechat.description,
+      color: "from-green-500 to-emerald-500",
+      copyable: true,
+    },
+  ];
 
   const handleCopy = async (text: string, index: number) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedIndex(index);
       toast({
-        title: "复制成功",
-        description: `${text} 已复制到剪贴板`,
+        title: t.contact.copySuccess,
+        description: `${text} ${t.contact.copySuccessDesc}`,
       });
       setTimeout(() => setCopiedIndex(null), 2000);
     } catch {
       toast({
-        title: "复制失败",
-        description: "请手动复制",
+        title: t.contact.copyFailed,
+        description: t.contact.copyFailedDesc,
         variant: "destructive",
       });
     }
@@ -69,14 +71,13 @@ export function ContactContent() {
             className="max-w-3xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-6">
-              联系方式
+              {t.contact.tag}
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              与我<span className="text-gradient">取得联系</span>
+              {t.contact.title}<span className="text-gradient">{t.contact.titleHighlight}</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              无论是技术探讨、项目合作还是其他事宜，都欢迎与我联系。
-              期待与志同道合的朋友交流！
+              {t.contact.description}
             </p>
           </motion.div>
         </div>
@@ -130,12 +131,12 @@ export function ContactContent() {
                             {copiedIndex === index ? (
                               <>
                                 <Check className="w-4 h-4 text-green-500" />
-                                已复制
+                                {t.contact.copied}
                               </>
                             ) : (
                               <>
                                 <Copy className="w-4 h-4" />
-                                复制
+                                {t.contact.copy}
                               </>
                             )}
                           </Button>
@@ -157,7 +158,7 @@ export function ContactContent() {
                               }
                             >
                               <Send className="w-4 h-4" />
-                              {method.title === "GitHub" ? "访问" : "发送"}
+                              {method.title === "GitHub" ? t.contact.visit : t.contact.send}
                             </a>
                           </Button>
                         )}
@@ -176,10 +177,9 @@ export function ContactContent() {
               className="mt-12 text-center"
             >
               <div className="card-elevated rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-3">期待与您交流</h3>
+                <h3 className="text-xl font-bold mb-3">{t.contact.expectTitle}</h3>
                 <p className="text-muted-foreground max-w-md mx-auto">
-                  如果您对我的项目感兴趣，或者有任何技术问题想要探讨，
-                  欢迎通过以上方式与我联系。我会尽快回复！
+                  {t.contact.expectDesc}
                 </p>
               </div>
             </motion.div>

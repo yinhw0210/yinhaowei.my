@@ -9,45 +9,7 @@ import {
   Layers,
   Zap
 } from "lucide-react";
-
-const skillCategories = [
-  {
-    title: "前端开发",
-    icon: Code2,
-    skills: ["Vue.js", "React", "TypeScript", "Tailwind CSS", "小程序开发"],
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "后端开发",
-    icon: Server,
-    skills: ["Java", "Python", "Spring Boot", "Flask", "Node.js"],
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    title: "AI 技术",
-    icon: Brain,
-    skills: ["TensorFlow", "PyTorch", "机器学习", "深度学习", "模型部署"],
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    title: "数据库",
-    icon: Database,
-    skills: ["MySQL", "MongoDB", "Redis", "PostgreSQL"],
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    title: "DevOps",
-    icon: Layers,
-    skills: ["Docker", "Linux", "Git", "CI/CD"],
-    color: "from-indigo-500 to-violet-500",
-  },
-  {
-    title: "其他技能",
-    icon: Zap,
-    skills: ["API 设计", "微服务", "系统设计", "性能优化"],
-    color: "from-teal-500 to-cyan-500",
-  },
-];
+import { useI18n } from "@/lib/i18n";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -65,6 +27,47 @@ const itemVariants = {
 };
 
 export const SkillsSection = () => {
+  const { t } = useI18n();
+
+  const skillCategories = [
+    {
+      title: t.skills.frontend,
+      icon: Code2,
+      skills: t.skills.frontendSkills,
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: t.skills.backend,
+      icon: Server,
+      skills: t.skills.backendSkills,
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      title: t.skills.ai,
+      icon: Brain,
+      skills: t.skills.aiSkills,
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      title: t.skills.database,
+      icon: Database,
+      skills: t.skills.databaseSkills,
+      color: "from-orange-500 to-red-500",
+    },
+    {
+      title: t.skills.devops,
+      icon: Layers,
+      skills: t.skills.devopsSkills,
+      color: "from-indigo-500 to-violet-500",
+    },
+    {
+      title: t.skills.other,
+      icon: Zap,
+      skills: t.skills.otherSkills,
+      color: "from-teal-500 to-cyan-500",
+    },
+  ];
+
   return (
     <section className="py-24 relative bg-card/30">
       <div className="container mx-auto px-4 md:px-6">
@@ -77,13 +80,13 @@ export const SkillsSection = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
-            技术栈
+            {t.skills.tag}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            核心<span className="text-gradient">技能</span>
+            {t.skills.title}<span className="text-gradient">{t.skills.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            多年积累的技术栈，覆盖前端、后端、AI 和运维全链路
+            {t.skills.description}
           </p>
         </motion.div>
 

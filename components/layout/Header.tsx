@@ -6,19 +6,22 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const navItems = [
-  { name: "首页", path: "/" },
-  { name: "关于我", path: "/about" },
-  { name: "项目作品", path: "/projects" },
-  { name: "技术文章", path: "/articles" },
-  { name: "联系方式", path: "/contact" },
-];
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { useI18n } from "@/lib/i18n";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useI18n();
+
+  const navItems = [
+    { name: t.nav.home, path: "/" },
+    { name: t.nav.about, path: "/about" },
+    { name: t.nav.projects, path: "/projects" },
+    { name: t.nav.articles, path: "/articles" },
+    { name: t.nav.contact, path: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +70,7 @@ export const Header = () => {
 
           {/* GitHub Button */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button variant="glass" size="sm" asChild>
               <a
                 href="https://github.com/yinhw0210"
@@ -117,6 +121,11 @@ export const Header = () => {
                   </li>
                 ))}
                 <li className="pt-2 border-t border-border/50">
+                  <div className="px-4 py-3">
+                    <LanguageSwitcher />
+                  </div>
+                </li>
+                <li className="border-t border-border/50">
                   <a
                     href="https://github.com/yinhw0210"
                     target="_blank"

@@ -14,53 +14,24 @@ import {
   Mail,
   Github
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
-const timeline = [
-  {
-    period: "技术起步",
-    title: "全栈开发基础",
-    description: "系统学习前端与后端开发技术，掌握 Vue、React、Java、Python 等核心技术栈",
-    icon: Code2,
-  },
-  {
-    period: "深入探索",
-    title: "技术研究",
-    description: "深入学习各种前沿技术，探索技术在实际项目中的应用",
-    icon: Lightbulb,
-  },
-  {
-    period: "实战积累",
-    title: "项目落地实践",
-    description: "将所学技术与实际需求结合，开发多个实用工具和开源项目",
-    icon: Rocket,
-  },
-  {
-    period: "持续成长",
-    title: "技术分享与开源",
-    description: "积极参与开源社区，分享技术心得，帮助更多开发者成长",
-    icon: TrendingUp,
-  },
-];
-
-const values = [
-  {
-    icon: Target,
-    title: "结果导向",
-    description: "专注于交付有价值的产品，让技术真正解决实际问题",
-  },
-  {
-    icon: Lightbulb,
-    title: "持续学习",
-    description: "保持对新技术的好奇心，不断拓展技术边界",
-  },
-  {
-    icon: Heart,
-    title: "用心创作",
-    description: "对代码质量有追求，注重细节和用户体验",
-  },
-];
+const timelineIcons = [Code2, Lightbulb, Rocket, TrendingUp];
+const valueIcons = [Target, Lightbulb, Heart];
 
 export function AboutContent() {
+  const { t } = useI18n();
+
+  const timeline = t.about.timeline.map((item, index) => ({
+    ...item,
+    icon: timelineIcons[index],
+  }));
+
+  const values = t.about.values.map((item, index) => ({
+    ...item,
+    icon: valueIcons[index],
+  }));
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -73,15 +44,13 @@ export function AboutContent() {
             className="max-w-3xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-6">
-              关于我
+              {t.about.tag}
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-gradient">AI全栈开发工程师</span>
+              <span className="text-gradient">{t.about.title}</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              热爱技术，专注于全栈开发与技术实践。
-              相信好的代码不仅能解决问题，更能创造价值。
-              始终保持学习的热情，用技术改变生活。
+              {t.about.description}
             </p>
           </motion.div>
         </div>
@@ -105,11 +74,11 @@ export function AboutContent() {
                 
                 {/* Info */}
                 <div className="flex-1 text-center md:text-left">
-                  <h2 className="text-3xl font-bold mb-4">AI全栈开发工程师</h2>
+                  <h2 className="text-3xl font-bold mb-4">{t.about.title}</h2>
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 text-muted-foreground">
                     <span className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-primary" />
-                      山东济南
+                      {t.about.location}
                     </span>
                     <span className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-primary" />
@@ -126,8 +95,7 @@ export function AboutContent() {
                     </a>
                   </div>
                   <p className="mt-4 text-muted-foreground">
-                    全栈开发工程师，热衷于探索新技术，喜欢将想法转化为实际的产品。
-                    业余时间喜欢研究开源项目，分享技术心得。
+                    {t.about.personalInfo}
                   </p>
                 </div>
               </div>
@@ -151,13 +119,12 @@ export function AboutContent() {
                   <Lightbulb className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold mb-2">个人理念</h2>
+                  <h2 className="text-2xl font-bold mb-2">{t.about.philosophyTag}</h2>
                   <p className="text-muted-foreground">My Philosophy</p>
                 </div>
               </div>
               <blockquote className="text-xl md:text-2xl font-medium text-foreground leading-relaxed border-l-4 border-primary pl-6">
-                "让技术落地于实际产品，用全栈能力构建完整解决方案。
-                不仅要写出能运行的代码，更要写出优雅、高效、可维护的代码。"
+                {t.about.philosophy}
               </blockquote>
             </div>
           </motion.div>
@@ -174,10 +141,10 @@ export function AboutContent() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              成长<span className="text-gradient">历程</span>
+              {t.about.journeyTitle}<span className="text-gradient">{t.about.journeyHighlight}</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              从技术起步到持续成长的旅程
+              {t.about.journeyDescription}
             </p>
           </motion.div>
 
@@ -225,7 +192,7 @@ export function AboutContent() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              核心<span className="text-gradient">价值观</span>
+              {t.about.valuesTitle}<span className="text-gradient">{t.about.valuesHighlight}</span>
             </h2>
           </motion.div>
 

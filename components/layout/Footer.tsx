@@ -1,33 +1,37 @@
+"use client";
+
 import Link from "next/link";
 import { Github, Mail, MessageCircle, Terminal } from "lucide-react";
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/yinhw0210",
-    icon: Github,
-  },
-  {
-    name: "Email",
-    href: "mailto:solivix@163.com",
-    icon: Mail,
-  },
-  {
-    name: "WeChat",
-    href: "/contact",
-    icon: MessageCircle,
-  },
-];
-
-const navLinks = [
-  { name: "首页", path: "/" },
-  { name: "关于我", path: "/about" },
-  { name: "项目作品", path: "/projects" },
-  { name: "技术文章", path: "/articles" },
-  { name: "联系方式", path: "/contact" },
-];
+import { useI18n } from "@/lib/i18n";
 
 export const Footer = () => {
+  const { t } = useI18n();
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      href: "https://github.com/yinhw0210",
+      icon: Github,
+    },
+    {
+      name: "Email",
+      href: "mailto:solivix@163.com",
+      icon: Mail,
+    },
+    {
+      name: "WeChat",
+      href: "/contact",
+      icon: MessageCircle,
+    },
+  ];
+
+  const navLinks = [
+    { name: t.nav.home, path: "/" },
+    { name: t.nav.about, path: "/about" },
+    { name: t.nav.projects, path: "/projects" },
+    { name: t.nav.articles, path: "/articles" },
+    { name: t.nav.contact, path: "/contact" },
+  ];
   return (
     <footer className="border-t border-border/50 bg-card/30">
       <div className="container mx-auto px-4 md:px-6 py-12">
@@ -39,17 +43,17 @@ export const Footer = () => {
                 <Terminal className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold">
-                AI全栈开发
+                {t.footer.brand}
               </span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
-              全栈开发工程师，专注于技术实践，用代码创造价值，用技术改变生活。
+              {t.footer.brandDescription}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">快速导航</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t.footer.quickNav}</h4>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.path}>
@@ -66,7 +70,7 @@ export const Footer = () => {
 
           {/* Social */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">联系方式</h4>
+            <h4 className="font-semibold text-foreground mb-4">{t.footer.contactInfo}</h4>
             <ul className="space-y-3">
               {socialLinks.map((link) => (
                 <li key={link.name}>
@@ -98,10 +102,10 @@ export const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} AI全栈开发. All rights reserved.
+            © {new Date().getFullYear()} {t.footer.brand}. {t.footer.copyright}
           </p>
           <p className="text-sm text-muted-foreground">
-            Made with <span className="text-primary">♥</span> and lots of{" "}
+            {t.footer.madeWith} <span className="text-primary">♥</span> {t.footer.and}{" "}
             <span className="font-mono text-primary">code</span>
           </p>
         </div>

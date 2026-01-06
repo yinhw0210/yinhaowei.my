@@ -4,11 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Star, Eye, GitFork } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
 
-const projects = [
+const projectsData = [
   {
-    title: "短视频去水印 & AI 证件照",
-    description: "支持多平台短视频去水印、AI智能证件照生成、图片涂抹消除等功能，基于深度学习算法实现高质量图像处理",
     tags: ["Python", "AI", "图像处理", "深度学习"],
     github: "https://github.com/yinhw0210/dataAnalysis-backend",
     gradient: "from-blue-500 via-cyan-500 to-teal-500",
@@ -16,8 +15,6 @@ const projects = [
     stats: { stars: 12, forks: 3 },
   },
   {
-    title: "豆包去水印工具",
-    description: "浏览器插件 + 脚本双模式，一键去除豆包平台水印，支持批量处理，操作简单高效",
     tags: ["JavaScript", "浏览器插件", "自动化", "Chrome Extension"],
     github: "https://github.com/yinhw0210/doubao-download",
     gradient: "from-purple-500 via-pink-500 to-rose-500",
@@ -25,8 +22,6 @@ const projects = [
     stats: { stars: 8, forks: 2 },
   },
   {
-    title: "排列三预测系统",
-    description: "基于数据分析的彩票号码预测系统，运用统计学算法和历史数据建模，提供概率分析",
     tags: ["Python", "数据分析", "算法", "统计学"],
     github: "https://github.com/yinhw0210/lottery-pick3",
     gradient: "from-orange-500 via-amber-500 to-yellow-500",
@@ -34,8 +29,6 @@ const projects = [
     stats: { stars: 15, forks: 5 },
   },
   {
-    title: "HTTP 请求模拟工具",
-    description: "强大的 HTTP 请求调试工具，支持多种请求方式和参数配置，方便 API 开发测试",
     tags: ["Java", "网络", "工具", "REST API"],
     github: "https://github.com/yinhw0210/http-sends",
     gradient: "from-green-500 via-emerald-500 to-teal-500",
@@ -69,6 +62,14 @@ const itemVariants = {
 };
 
 export const ProjectsPreview = () => {
+  const { t } = useI18n();
+
+  const projects = projectsData.map((project, index) => ({
+    ...project,
+    title: t.projectsPreview.projects[index]?.title || "",
+    description: t.projectsPreview.projects[index]?.description || "",
+  }));
+
   return (
     <section className="py-24 relative">
       <div className="container mx-auto px-4 md:px-6">
@@ -81,13 +82,13 @@ export const ProjectsPreview = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
-            开源项目
+            {t.projectsPreview.tag}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            精选<span className="text-gradient">项目作品</span>
+            {t.projectsPreview.title}<span className="text-gradient">{t.projectsPreview.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            这些是我的开源项目，涵盖 AI 应用、工具开发、数据分析等多个领域
+            {t.projectsPreview.description}
           </p>
         </motion.div>
 
@@ -160,7 +161,7 @@ export const ProjectsPreview = () => {
                       rel="noopener noreferrer"
                     >
                       <Github className="w-4 h-4" />
-                      查看源码
+                      {t.projectsPreview.viewSource}
                     </a>
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
@@ -188,7 +189,7 @@ export const ProjectsPreview = () => {
         >
           <Button variant="gradient" size="lg" asChild>
             <Link href="/projects">
-              查看全部项目
+              {t.projectsPreview.viewAll}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>

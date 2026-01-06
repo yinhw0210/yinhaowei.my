@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { ArrowUpRight, Calendar, Clock, Tag } from "lucide-react";
-import { articles } from "@/data/articles";
+import { articles as articlesData } from "@/data/articles";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,6 +23,15 @@ const itemVariants = {
 };
 
 export function ArticlesContent() {
+  const { t } = useI18n();
+
+  const articles = articlesData.map((article, index) => ({
+    ...article,
+    title: t.articles.articlesList[index]?.title || article.title,
+    description: t.articles.articlesList[index]?.description || article.description,
+    readTime: t.articles.articlesList[index]?.readTime || article.readTime,
+  }));
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -34,13 +44,13 @@ export function ArticlesContent() {
             className="max-w-3xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-6">
-              技术分享
+              {t.articles.tag}
             </span>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              技术<span className="text-gradient">文章</span>
+              {t.articles.title}<span className="text-gradient">{t.articles.titleHighlight}</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              记录技术学习心得，分享开发经验与最佳实践
+              {t.articles.description}
             </p>
           </motion.div>
         </div>
@@ -109,7 +119,7 @@ export function ArticlesContent() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2"
                       >
-                        阅读全文
+                        {t.articles.readMore}
                         <ArrowUpRight className="w-4 h-4" />
                       </a>
                     </Button>
@@ -127,7 +137,7 @@ export function ArticlesContent() {
               className="text-center py-20"
             >
               <p className="text-muted-foreground text-lg">
-                暂无文章，敬请期待...
+                {t.articles.noArticles}
               </p>
             </motion.div>
           )}

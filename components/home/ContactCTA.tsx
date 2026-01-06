@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, Mail, Github, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
 
 export const ContactCTA = () => {
+  const { t } = useI18n();
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background Glow */}
@@ -22,24 +25,24 @@ export const ContactCTA = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            想要<span className="text-gradient">合作</span>或交流？
+            {t.contactCTA.title}<span className="text-gradient">{t.contactCTA.titleHighlight}</span>{t.contactCTA.titleEnd}
           </h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-            无论是技术探讨、项目合作还是工作机会，都欢迎与我联系
+            {t.contactCTA.description}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Button variant="hero" size="xl" asChild>
               <Link href="/contact">
-                联系我
+                {t.contactCTA.contactMe}
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>
             <Button variant="glass" size="xl" asChild>
               <a href="mailto:solivix@163.com">
                 <Mail className="w-5 h-5" />
-                发送邮件
+                {t.contactCTA.sendEmail}
               </a>
             </Button>
           </div>
