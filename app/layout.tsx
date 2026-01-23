@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | yinhw0210",
   },
   description:
-    "缺乏专注的竞选者的个人博客，分享技术文章、开源项目和学习心得。涵盖 React、Vue、Python、Java、机器学习、深度学习等技术栈。",
+    "bread · 0210的个人博客，分享技术文章、开源项目和学习心得。涵盖 React、Vue、Python、Java、机器学习、深度学习等技术栈。",
   keywords: [
     "AI开发",
     "全栈开发",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     url: "https://yinhw.dev",
     title: "yinhw0210 - Personal Blog",
     description:
-      "缺乏专注的竞选者的个人博客，分享技术文章、开源项目和学习心得。",
+      "bread · 0210的个人博客，分享技术文章、开源项目和学习心得。",
     siteName: "yinhw0210",
     images: [
       {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "yinhw0210 - Personal Blog",
     description:
-      "缺乏专注的竞选者的个人博客，分享技术文章、开源项目和学习心得。",
+      "bread · 0210的个人博客，分享技术文章、开源项目和学习心得。",
     images: ["/og-image.png"],
   },
   robots: {
@@ -64,7 +64,13 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-icon.svg", type: "image/svg+xml" },
+    ],
   },
 };
 
@@ -74,7 +80,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className="antialiased">
         <I18nProvider>
           <TooltipProvider>

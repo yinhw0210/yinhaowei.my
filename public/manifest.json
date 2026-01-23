@@ -1,0 +1,22 @@
+{
+  "name": "yinhw0210 - Personal Blog",
+  "short_name": "yinhw0210",
+  "description": "缺乏专注的竞选者的个人博客 - 90年代复古风格",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#008080",
+  "theme_color": "#000080",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ]
+}

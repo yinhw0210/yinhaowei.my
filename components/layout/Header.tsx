@@ -1,16 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { useI18n } from "@/lib/i18n";
 
 export const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { t } = useI18n();
@@ -23,124 +19,73 @@ export const Header = () => {
     { name: t.nav.contact, path: "/contact" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-effect py-3" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-6">
-        <nav className="flex items-center justify-between">
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg ${
-                    pathname === item.path
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.name}
-                  {pathname === item.path && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-primary/10 rounded-lg -z-10"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* GitHub Button */}
-          <div className="hidden md:flex items-center gap-3">
-            <LanguageSwitcher />
-            <Button variant="glass" size="sm" asChild>
-              <a
-                href="https://github.com/yinhw0210"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="w-4 h-4" />
-                GitHub
-              </a>
-            </Button>
+    <header className="bg-[#c0c0c0] border-b-2 border-b-black p-4">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-yellow-300 win-inset flex items-center justify-center border-2 border-black animate-pulse">
+            <span className="text-2xl text-red-600">👤</span>
           </div>
+          <h1 className="text-2xl font-black tracking-tighter uppercase italic drop-shadow-[2px_2px_0_rgba(0,0,0,0.2)]">
+            bread · 0210
+          </h1>
+        </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-2 flex-wrap justify-center">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`win-button px-4 py-1 font-bold no-underline cursor-pointer ${
+                pathname === item.path ? "bg-blue-200" : "hover:text-blue-800"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
+        
+        {/* Mobile Burger */}
+        <button 
+          className="md:hidden win-button px-2 py-1"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <span className="text-xl">☰</span>
+        </button>
+
+        <div className="flex gap-2">
+          <a
+            href="https://github.com/yinhw0210"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="win-button px-2 py-1 flex items-center gap-1 text-xs no-underline cursor-pointer"
+          >
+            <span>🐙</span> GitHub
+          </a>
+          <LanguageSwitcher />
+        </div>
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-effect border-t border-border/50 mt-3"
-          >
-            <div className="container mx-auto px-4 py-4">
-              <ul className="flex flex-col gap-2">
-                {navItems.map((item) => (
-                  <li key={item.path}>
-                    <Link
-                      href={item.path}
-                      className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        pathname === item.path
-                          ? "bg-primary/10 text-primary"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-                <li className="pt-2 border-t border-border/50">
-                  <div className="px-4 py-3">
-                    <LanguageSwitcher />
-                  </div>
-                </li>
-                <li className="border-t border-border/50">
-                  <a
-                    href="https://github.com/yinhw0210"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground"
-                  >
-                    <Github className="w-4 h-4" />
-                    GitHub
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isMobileMenuOpen && (
+        <div className="md:hidden mt-4 pt-4 border-t-2 border-gray-400">
+          <nav className="flex flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`win-button px-4 py-2 font-bold no-underline cursor-pointer text-center ${
+                  pathname === item.path ? "bg-blue-200" : ""
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

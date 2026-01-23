@@ -1,11 +1,11 @@
 # Design Reference
 
 ## Original Prompt
-创建一个90年代复古风格的个人博客首页，主题为"缺乏专注的竞选者"。
+创建一个90年代复古风格的个人博客首页，主题为"bread · 0210"。
 
 设计要素：
 - 顶部导航栏：Logo、导航菜单（首页、关于我、项目作品、技术文章、联系方式）、GitHub按钮、语言切换器（中/English）
-- Hero区域：欢迎标签、主标题"缺乏专注的竞选者"、副标题、"查看项目作品"和"GitHub"按钮、滚动指示器。使用复古的beveled 3D按钮、系统字体、高对比度颜色。
+- Hero区域：欢迎标签、主标题"bread · 0210"、副标题、"查看项目作品"和"GitHub"按钮、滚动指示器。使用复古的beveled 3D按钮、系统字体、高对比度颜色。
 - 统计数据区：三列数据展示（开源项目4+、技术文章10+、技术栈10+）
 - 项目预览区：2列网格展示4个精选项目卡片（短视频去水印&AI证件照、豆包去水印工具、排列三预测系统、HTTP请求模拟工具），每个项目包含图标、标题、描述、技术标签、Stars/Forks数、"查看源码"按钮
 - 技能区：3列网格展示6个技能分类（前端、后端、AI、数据库、DevOps、其他）
@@ -26,7 +26,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>缺乏专注的竞选者 | Unfocused Candidate</title>
+  <title>bread · 0210 | Unfocused Candidate</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <style>
@@ -188,7 +188,7 @@
       <div class="win-titlebar flex justify-between items-center select-none">
         <div class="flex items-center gap-2">
           <iconify-icon icon="pixelarticons:monitor" class="text-lg"></iconify-icon>
-          <span>Microsoft Internet Explorer - [缺乏专注的竞选者]</span>
+          <span>Microsoft Internet Explorer - [bread · 0210]</span>
         </div>
         <div class="flex gap-1">
           <div class="w-4 h-4 bg-[#c0c0c0] win-outset flex items-center justify-center text-[10px] text-black font-bold leading-none pb-1">_</div>
@@ -232,7 +232,7 @@
                  <iconify-icon icon="pixelarticons:user" class="text-2xl text-red-600"></iconify-icon>
               </div>
               <h1 class="text-2xl font-black tracking-tighter uppercase italic drop-shadow-[2px_2px_0_rgba(0,0,0,0.2)]">
-                缺乏专注的竞选者
+                bread · 0210
               </h1>
             </div>
 
@@ -285,7 +285,7 @@
               </div>
 
               <h2 class="text-4xl md:text-6xl font-black uppercase text-blue-900 drop-shadow-[3px_3px_0_#fff]" style="-webkit-text-stroke: 1px black;">
-                缺乏专注的竞选者
+                bread · 0210
               </h2>
               <p class="text-lg md:text-xl font-bold bg-white inline-block px-2 border border-black shadow-[4px_4px_0_black]">
                 Unfocused Candidate
@@ -627,7 +627,7 @@
               <div>
                  <div class="flex items-center gap-2 text-yellow-400 font-bold text-lg mb-4">
                     <iconify-icon icon="pixelarticons:user"></iconify-icon>
-                    缺乏专注的竞选者
+                    bread · 0210
                  </div>
                  <p class="font-mono text-xs leading-relaxed max-w-xs text-gray-400">
                     全栈开发工程师，专注于技术实践，用代码创造价值，用技术改变生活。<br>
@@ -663,7 +663,7 @@
            </div>
            
            <div class="text-center border-t border-gray-700 pt-6 font-mono text-xs text-gray-500">
-              <p>&copy; 2025 缺乏专注的竞选者. All rights reserved.</p>
+              <p>&copy; 2025 bread · 0210. All rights reserved.</p>
               <p class="mt-2">Best viewed with Internet Explorer 4.0 or Netscape Navigator at 800x600 resolution.</p>
            </div>
         </footer>

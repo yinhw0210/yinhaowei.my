@@ -1,65 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Github, Star, Eye, GitFork } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 
 const projectsData = [
   {
-    tags: ["Python", "AI", "图像处理", "深度学习"],
+    tags: ["Python", "AI", "DL"],
     github: "https://github.com/yinhw0210/dataAnalysis-backend",
-    gradient: "from-blue-500 via-cyan-500 to-teal-500",
     icon: "🎬",
     stats: { stars: 12, forks: 3 },
+    filename: "video_watermark.exe",
   },
   {
-    tags: ["JavaScript", "浏览器插件", "自动化", "Chrome Extension"],
+    tags: ["JS", "Chrome", "Plugin"],
     github: "https://github.com/yinhw0210/doubao-download",
-    gradient: "from-purple-500 via-pink-500 to-rose-500",
     icon: "🔧",
     stats: { stars: 8, forks: 2 },
+    filename: "doubao_tool.js",
   },
   {
-    tags: ["Python", "数据分析", "算法", "统计学"],
+    tags: ["Python", "Data", "Math"],
     github: "https://github.com/yinhw0210/lottery-pick3",
-    gradient: "from-orange-500 via-amber-500 to-yellow-500",
     icon: "🎯",
     stats: { stars: 15, forks: 5 },
+    filename: "lottery_predict.py",
   },
   {
-    tags: ["Java", "网络", "工具", "REST API"],
+    tags: ["Java", "Network", "REST"],
     github: "https://github.com/yinhw0210/http-sends",
-    gradient: "from-green-500 via-emerald-500 to-teal-500",
     icon: "🌐",
     stats: { stars: 6, forks: 1 },
+    filename: "http_tool.java",
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-    }
-  },
-};
 
 export const ProjectsPreview = () => {
   const { t } = useI18n();
@@ -71,129 +44,68 @@ export const ProjectsPreview = () => {
   }));
 
   return (
-    <section className="py-24 relative">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
-            {t.projectsPreview.tag}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.projectsPreview.title}<span className="text-gradient">{t.projectsPreview.titleHighlight}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t.projectsPreview.description}
-          </p>
-        </motion.div>
+    <section className="p-6 md:p-12 bg-[#c0c0c0]">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-8 h-8 md:w-12 md:h-12 border border-black bg-white flex items-center justify-center text-2xl">
+          💾
+        </div>
+        <h3 className="text-2xl md:text-3xl font-black uppercase">
+          {t.projectsPreview.title} <span className="text-sm font-normal normal-case italic ml-2">(Featured Works)</span>
+        </h3>
+      </div>
 
-        {/* Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {projects.map((project, index) => (
-            <motion.article
-              key={index}
-              variants={itemVariants}
-              className="group relative"
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10"
-                style={{
-                  backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`,
-                }}
-              />
-              
-              <div className="card-elevated rounded-2xl p-6 h-full hover-lift overflow-hidden relative">
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.gradient} opacity-10 rounded-full blur-2xl transform translate-x-8 -translate-y-8 group-hover:opacity-20 transition-opacity duration-500`} />
-                
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-2xl shadow-lg`}>
-                      {project.icon}
-                    </div>
-                    <div className={`h-1 w-16 rounded-full bg-gradient-to-r ${project.gradient}`} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {projects.map((project, index) => (
+          <div key={index} className="win-window win-outset shadow-[8px_8px_0_rgba(0,0,0,0.5)]">
+            <div className="win-titlebar flex justify-between items-center mb-2">
+              <span className="truncate">{project.filename}</span>
+              <button className="win-button w-4 h-4 flex items-center justify-center pb-1 leading-none text-xs">
+                x
+              </button>
+            </div>
+            <div className="bg-white win-inset p-4 h-[calc(100%-32px)] flex flex-col">
+              <div className="flex items-start gap-4 mb-3">
+                <div className="text-4xl min-w-[40px]">{project.icon}</div>
+                <div>
+                  <h4 className="font-bold text-lg leading-tight mb-1">{project.title}</h4>
+                  <div className="flex gap-1 flex-wrap text-xs mb-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span key={tagIndex} className="bg-gray-200 border border-gray-400 px-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 text-yellow-500" />
-                      {project.stats.stars}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <GitFork className="w-3.5 h-3.5" />
-                      {project.stats.forks}
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-5 line-clamp-3 leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium bg-muted/80 text-muted-foreground border border-border/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all duration-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-                  <Button variant="outline" size="sm" asChild className="flex-1">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="w-4 h-4" />
-                      {t.projectsPreview.viewSource}
-                    </a>
-                  </Button>
-                  <Button variant="ghost" size="sm" asChild>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Eye className="w-4 h-4" />
-                    </a>
-                  </Button>
                 </div>
               </div>
-            </motion.article>
-          ))}
-        </motion.div>
-
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-12"
+              <p className="text-sm text-gray-800 mb-4 flex-grow border border-dotted border-gray-400 p-2 bg-yellow-50">
+                {project.description}
+              </p>
+              <div className="flex justify-between items-end">
+                <div className="text-xs font-mono space-y-1">
+                  <div>STARS: {project.stats.stars}</div>
+                  <div>FORKS: {project.stats.forks}</div>
+                </div>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="win-button px-3 py-1 text-sm font-bold active:translate-y-px no-underline cursor-pointer"
+                >
+                  {t.projectsPreview.viewSource} &gt;&gt;
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-8 text-center">
+        <Link 
+          href="/projects" 
+          className="inline-block font-bold text-blue-900 hover:text-red-600 hover:bg-yellow-200 px-2 no-underline cursor-pointer"
         >
-          <Button variant="gradient" size="lg" asChild>
-            <Link href="/projects">
-              {t.projectsPreview.viewAll}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
-        </motion.div>
+          [{t.projectsPreview.viewAll} / VIEW ALL PROJECTS]
+        </Link>
       </div>
     </section>
   );

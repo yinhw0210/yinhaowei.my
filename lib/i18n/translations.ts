@@ -194,7 +194,7 @@ export const translations = {
     // Hero Section
     hero: {
       welcome: "欢迎来到我的个人博客",
-      title: "缺乏专注的竞选者",
+      title: "bread · 0210",
       subtitle: "热爱技术，专注于全栈开发与技术实践，",
       subtitle2: "用代码创造价值，记录成长的点滴。",
       viewProjects: "查看项目作品",
@@ -259,7 +259,7 @@ export const translations = {
     },
     // Footer
     footer: {
-      brand: "缺乏专注的竞选者",
+      brand: "bread · 0210",
       brandDescription: "全栈开发工程师，专注于技术实践，用代码创造价值，用技术改变生活。",
       quickNav: "快速导航",
       contactInfo: "联系方式",
@@ -270,7 +270,7 @@ export const translations = {
     // About Page
     about: {
       tag: "关于我",
-      title: "缺乏专注的竞选者",
+      title: "bread · 0210",
       description: "热爱技术，专注于全栈开发与技术实践。相信好的代码不仅能解决问题，更能创造价值。始终保持学习的热情，用技术改变生活。",
       location: "山东济南",
       personalInfo: "全栈开发工程师，热衷于探索新技术，喜欢将想法转化为实际的产品。业余时间喜欢研究开源项目，分享技术心得。",

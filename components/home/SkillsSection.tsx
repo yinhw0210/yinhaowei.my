@@ -1,30 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { 
-  Code2, 
-  Server, 
-  Brain, 
-  Database,
-  Layers,
-  Zap
-} from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1 },
-};
 
 export const SkillsSection = () => {
   const { t } = useI18n();
@@ -32,104 +8,61 @@ export const SkillsSection = () => {
   const skillCategories = [
     {
       title: t.skills.frontend,
-      icon: Code2,
+      icon: "💻",
       skills: t.skills.frontendSkills,
-      color: "from-blue-500 to-cyan-500",
     },
     {
       title: t.skills.backend,
-      icon: Server,
+      icon: "🖥️",
       skills: t.skills.backendSkills,
-      color: "from-green-500 to-emerald-500",
     },
     {
       title: t.skills.ai,
-      icon: Brain,
+      icon: "⚡",
       skills: t.skills.aiSkills,
-      color: "from-purple-500 to-pink-500",
     },
     {
       title: t.skills.database,
-      icon: Database,
+      icon: "💾",
       skills: t.skills.databaseSkills,
-      color: "from-orange-500 to-red-500",
     },
     {
       title: t.skills.devops,
-      icon: Layers,
+      icon: "💼",
       skills: t.skills.devopsSkills,
-      color: "from-indigo-500 to-violet-500",
     },
     {
       title: t.skills.other,
-      icon: Zap,
+      icon: "➕",
       skills: t.skills.otherSkills,
-      color: "from-teal-500 to-cyan-500",
     },
   ];
 
   return (
-    <section className="py-24 relative bg-card/30">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
-            {t.skills.tag}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t.skills.title}<span className="text-gradient">{t.skills.titleHighlight}</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t.skills.description}
-          </p>
-        </motion.div>
-
-        {/* Skills Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group card-elevated rounded-2xl p-6 hover-lift"
-            >
-              {/* Icon */}
-              <div
-                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-5 shadow-lg`}
-              >
-                <category.icon className="w-7 h-7 text-white" />
+    <section className="p-6 md:p-12 bg-[#008080] text-white">
+      <div className="win-window win-outset bg-[#c0c0c0] text-black">
+        <div className="p-4">
+          <h3 className="text-2xl font-black mb-6 uppercase border-b-2 border-gray-500 pb-2 flex items-center gap-2">
+            <span className="text-2xl">⚙️</span>
+            {t.skills.title} (Core Skills)
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillCategories.map((category, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <div className="font-bold flex items-center gap-2">
+                  <span className="text-xl">{category.icon}</span>
+                  <span>{category.title}</span>
+                </div>
+                <ul className="win-inset bg-white p-2 h-full list-disc list-inside text-sm font-mono">
+                  {category.skills.map((skill, skillIndex) => (
+                    <li key={skillIndex}>{skill}</li>
+                  ))}
+                </ul>
               </div>
-
-              {/* Title */}
-              <h3 className="text-lg font-bold mb-4 group-hover:text-primary transition-colors">
-                {category.title}
-              </h3>
-
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <span
-                    key={skillIndex}
-                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-muted text-foreground border border-border/50"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

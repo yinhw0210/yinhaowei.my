@@ -1,136 +1,187 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
+    /* 90s Windows 95 Color Palette */
+    --win-gray: #c0c0c0;
+    --win-blue: #000080;
+    --win-teal: #008080;
+    --win-text: #000000;
+    --win-link: #0000FF;
+    --win-white: #ffffff;
+    --win-shadow-dark: #404040;
+    --win-shadow-light: #dfdfdf;
+    --win-yellow: #FFFF00;
+    --win-green: #00FF00;
+    
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 96%;
+    --card: 0 0% 75%;
+    --card-foreground: 0 0% 0%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 0 0% 75%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 180 100% 25%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 76% 60%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 100% 25%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 30%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 180 100% 25%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 20%;
-    --input: 217 33% 17%;
-    --ring: 199 89% 48%;
+    --border: 0 0% 50%;
+    --input: 0 0% 100%;
+    --ring: 180 100% 25%;
 
-    --radius: 0.75rem;
+    --radius: 0rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(270, 76%, 60%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(222, 47%, 6%) 0%, hsl(222, 47%, 10%) 50%, hsl(222, 47%, 6%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(222, 47%, 11%) 0%, hsl(222, 47%, 8%) 100%);
-    --gradient-glow: radial-gradient(ellipse at center, hsl(199, 89%, 48%, 0.15) 0%, transparent 70%);
-    
-    --shadow-glow: 0 0 40px hsl(199, 89%, 48%, 0.2);
-    --shadow-card: 0 10px 40px -10px hsl(0, 0%, 0%, 0.5);
-    --shadow-elevated: 0 25px 50px -12px hsl(0, 0%, 0%, 0.6);
-
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-sans: 'Inter', system-ui, sans-serif;
-
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 199 89% 48%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 217 33% 20%;
-    --sidebar-ring: 199 89% 48%;
+    --font-mono: 'Courier New', 'MS Sans Serif', monospace;
+    --font-sans: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, Arial, sans-serif;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    image-rendering: pixelated;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground;
     font-family: var(--font-sans);
+    background-color: var(--win-teal);
+    cursor: default;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
-    @apply font-bold tracking-tight;
+    @apply font-bold;
+    letter-spacing: 0.5px;
   }
 
   code, pre {
     font-family: var(--font-mono);
   }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 16px;
+    background: var(--win-gray);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--win-gray);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: repeating-linear-gradient(45deg, #ccc, #ccc 2px, #fff 2px, #fff 4px);
+  }
 }
 
 @layer components {
+  /* 90s Windows 95 UI Components */
+  .win-outset {
+    background-color: var(--win-gray);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    box-shadow: 1px 1px 0px 0px #000;
+  }
+  
+  .win-outset-thin {
+    background-color: var(--win-gray);
+    border-top: 1px solid var(--win-white);
+    border-left: 1px solid var(--win-white);
+    border-right: 1px solid var(--win-shadow-dark);
+    border-bottom: 1px solid var(--win-shadow-dark);
+  }
+
+  .win-inset {
+    background-color: var(--win-white);
+    border-top: 2px solid var(--win-shadow-dark);
+    border-left: 2px solid var(--win-shadow-dark);
+    border-right: 2px solid var(--win-white);
+    border-bottom: 2px solid var(--win-white);
+    box-shadow: inset 1px 1px 0px 0px #000;
+  }
+
+  .win-button {
+    background-color: var(--win-gray);
+    border-top: 2px solid var(--win-white);
+    border-left: 2px solid var(--win-white);
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .win-button:active {
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid var(--win-white);
+    border-bottom: 2px solid var(--win-white);
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .win-button:focus {
+    outline: 1px dotted #000;
+    outline-offset: -4px;
+  }
+
+  .win-window {
+    background: var(--win-gray);
+    padding: 3px;
+  }
+
+  .win-titlebar {
+    background: linear-gradient(90deg, var(--win-blue), #1084d0);
+    color: white;
+    padding: 2px 4px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
-  }
-
-  .bg-gradient-primary {
-    background-image: var(--gradient-primary);
-  }
-
-  .bg-gradient-hero {
-    background-image: var(--gradient-hero);
-  }
-
-  .bg-gradient-card {
-    background-image: var(--gradient-card);
-  }
-
-  .glow-primary {
-    box-shadow: var(--shadow-glow);
+    @apply font-black uppercase;
+    color: var(--win-blue);
+    text-shadow: 3px 3px 0 #fff;
+    -webkit-text-stroke: 1px black;
   }
 
   .card-elevated {
-    background-image: var(--gradient-card);
-    box-shadow: var(--shadow-card);
-    @apply border border-border/50;
+    @apply win-outset;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
   }
 
   .glass-effect {
-    @apply backdrop-blur-xl bg-card/80 border border-border/50;
+    @apply win-outset;
   }
 
   .hover-lift {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-200;
   }
 
   .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elevated);
-  }
-
-  .link-underline {
-    @apply relative;
-  }
-
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300;
-  }
-
-  .link-underline:hover::after {
-    @apply w-full;
+    transform: translateY(-2px);
   }
 }
 
@@ -143,5 +194,55 @@
   }
   .animation-delay-600 {
     animation-delay: 600ms;
+  }
+
+  /* 90s Animations */
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  .animate-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 15s linear infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes rainbow {
+    0% { color: red; }
+    20% { color: yellow; }
+    40% { color: lime; }
+    60% { color: cyan; }
+    80% { color: blue; }
+    100% { color: magenta; }
+  }
+  
+  .rainbow-text {
+    animation: rainbow 4s linear infinite;
+  }
+
+  /* CRT Scanline Effect */
+  .scanlines::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 9999;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
   }
 }

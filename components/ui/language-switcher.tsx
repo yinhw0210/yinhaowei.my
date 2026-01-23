@@ -1,8 +1,6 @@
 "use client";
 
 import { useI18n, Language } from "@/lib/i18n";
-import { Globe } from "lucide-react";
-import { Button } from "./button";
 
 export function LanguageSwitcher() {
   const { language, setLanguage } = useI18n();
@@ -13,14 +11,11 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
+    <button
       onClick={toggleLanguage}
-      className="gap-1.5"
+      className="win-button px-2 py-1 text-xs font-bold bg-blue-100 cursor-pointer"
     >
-      <Globe className="w-4 h-4" />
-      <span className="text-xs font-medium">{language === "en" ? "中文" : "EN"}</span>
-    </Button>
+      {language === "en" ? "中文" : "EN"}
+    </button>
   );
 }
