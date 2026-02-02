@@ -9,15 +9,15 @@ export interface Article {
 }
 
 export const articles: Article[] = [
-  {
-    id: "1",
-    title: "豆包生图有水印？开源插件 + Python 脚本帮你一键搞定",
-    description: "通过逆向分析豆包 API 响应，实现一键获取 AI 生成图片的 2048x2048 无水印高清原图。提供浏览器插件和 Python 脚本两种方案，满足不同使用场景。",
-    date: "2025-06-18",
-    tags: ["开源", "Python", "浏览器插件", "逆向工程"],
-    externalUrl: "https://juejin.cn/post/7590020026395181110",
-    readTime: "8 分钟",
-  },
+  // {
+  //   id: "1",
+  //   title: "豆包生图有水印？开源插件 + Python 脚本帮你一键搞定",
+  //   description: "通过逆向分析豆包 API 响应，实现一键获取 AI 生成图片的 2048x2048 无水印高清原图。提供浏览器插件和 Python 脚本两种方案，满足不同使用场景。",
+  //   date: "2025-06-18",
+  //   tags: ["开源", "Python", "浏览器插件", "逆向工程"],
+  //   externalUrl: "https://juejin.cn/post/7590020026395181110",
+  //   readTime: "8 分钟",
+  // },
   {
     id: "2",
     title: "如何用 Monaco 和 Babel 打造高性能 React-Playground",

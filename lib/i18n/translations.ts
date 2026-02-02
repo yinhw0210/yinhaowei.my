@@ -51,10 +51,10 @@ export const translations = {
           title: "Video Watermark Remover & AI ID Photo",
           description: "Multi-platform video watermark removal, AI smart ID photo generation, image inpainting and more, based on deep learning algorithms",
         },
-        {
-          title: "Doubao Watermark Remover",
-          description: "Browser extension + script dual mode, one-click watermark removal for Doubao platform, supports batch processing",
-        },
+        // {
+        //   title: "Doubao Watermark Remover",
+        //   description: "Browser extension + script dual mode, one-click watermark removal for Doubao platform, supports batch processing",
+        // },
         {
           title: "Lottery Pick3 Prediction",
           description: "Data analysis based lottery prediction system, using statistical algorithms and historical data modeling",
@@ -125,11 +125,11 @@ export const translations = {
           description: "Multi-platform video watermark removal, AI smart ID photo generation, image inpainting and more. Python backend development, integrated multiple AI models for intelligent image processing.",
           features: ["Support Douyin, Kuaishou and other mainstream platforms", "AI smart ID photo generation with auto crop and background replacement", "Image inpainting function for precise watermark removal"],
         },
-        {
-          title: "Doubao Watermark Remover",
-          description: "Browser extension + script dual mode, one-click watermark removal for Doubao platform. Supports batch download, simple and efficient.",
-          features: ["Browser extension, install and use", "Tampermonkey script support, flexible deployment", "Batch download function, improve efficiency"],
-        },
+        // {
+        //   title: "Doubao Watermark Remover",
+        //   description: "Browser extension + script dual mode, one-click watermark removal for Doubao platform. Supports batch download, simple and efficient.",
+        //   features: ["Browser extension, install and use", "Tampermonkey script support, flexible deployment", "Batch download function, improve efficiency"],
+        // },
         {
           title: "Lottery Pick3 Prediction",
           description: "Data analysis based lottery prediction system, using statistical algorithms to analyze historical data and provide probability analysis.",
@@ -151,7 +151,7 @@ export const translations = {
       readMore: "Read More",
       noArticles: "No articles yet, stay tuned...",
       articlesList: [
-        { title: "Remove Doubao AI Image Watermarks with Open Source Plugin + Python Script", description: "Reverse engineer Doubao API to get 2048x2048 watermark-free HD images. Two solutions: browser extension and Python script for different use cases.", readTime: "8 min" },
+        // { title: "Remove Doubao AI Image Watermarks with Open Source Plugin + Python Script", description: "Reverse engineer Doubao API to get 2048x2048 watermark-free HD images. Two solutions: browser extension and Python script for different use cases.", readTime: "8 min" },
         { title: "Build High-Performance React-Playground with Monaco and Babel", description: "Share how to build a React online editor using Monaco Editor for code editing, Babel for real-time JSX compilation, with local file imports and sandboxed preview.", readTime: "10 min" },
         { title: "MasterGo AI Generate Design and Code", description: "Introduce MasterGo's AI design and code generation tool. Quickly generate page designs and frontend code from sketches and text descriptions.", readTime: "5 min" },
         { title: "Drawing Flying Lines with Shaders in Three.js", description: "Detailed guide on implementing flying line effects in Three.js, including track lines and dynamic lines using Bezier curves and shaders for smooth animations.", readTime: "12 min" },
@@ -234,10 +234,10 @@ export const translations = {
           title: "短视频去水印 & AI 证件照",
           description: "支持多平台短视频去水印、AI智能证件照生成、图片涂抹消除等功能，基于深度学习算法实现高质量图像处理",
         },
-        {
-          title: "豆包去水印工具",
-          description: "浏览器插件 + 脚本双模式，一键去除豆包平台水印，支持批量处理，操作简单高效",
-        },
+        // {
+        //   title: "豆包去水印工具",
+        //   description: "浏览器插件 + 脚本双模式，一键去除豆包平台水印，支持批量处理，操作简单高效",
+        // },
         {
           title: "排列三预测系统",
           description: "基于数据分析的彩票号码预测系统，运用统计学算法和历史数据建模，提供概率分析",
@@ -308,11 +308,11 @@ export const translations = {
           description: "支持多平台短视频去水印、AI 智能证件照生成、图片涂抹消除等功能。基于 Python 后端开发,集成多种 AI 模型实现智能图像处理。",
           features: ["支持抖音、快手等主流短视频平台去水印", "AI 智能证件照生成,自动裁剪和背景替换", "图片涂抹消除功能,精准去除图片水印"],
         },
-        {
-          title: "豆包去水印工具",
-          description: "浏览器插件 + 脚本双模式,一键去除豆包平台水印。支持批量下载,操作简单高效。",
-          features: ["浏览器插件形式,安装即用", "油猴脚本支持,灵活部署", "批量下载功能,提升效率"],
-        },
+        // {
+        //   title: "豆包去水印工具",
+        //   description: "浏览器插件 + 脚本双模式,一键去除豆包平台水印。支持批量下载,操作简单高效。",
+        //   features: ["浏览器插件形式,安装即用", "油猴脚本支持,灵活部署", "批量下载功能,提升效率"],
+        // },
         {
           title: "排列三预测系统",
           description: "基于数据分析的彩票号码预测系统,运用统计学算法分析历史数据,提供参考预测。",
@@ -334,7 +334,7 @@ export const translations = {
       readMore: "阅读全文",
       noArticles: "暂无文章，敬请期待...",
       articlesList: [
-        { title: "豆包生图有水印？开源插件 + Python 脚本帮你一键搞定", description: "通过逆向分析豆包 API 响应，实现一键获取 AI 生成图片的 2048x2048 无水印高清原图。提供浏览器插件和 Python 脚本两种方案，满足不同使用场景。", readTime: "8 分钟" },
+        // { title: "豆包生图有水印？开源插件 + Python 脚本帮你一键搞定", description: "通过逆向分析豆包 API 响应，实现一键获取 AI 生成图片的 2048x2048 无水印高清原图。提供浏览器插件和 Python 脚本两种方案，满足不同使用场景。", readTime: "8 分钟" },
         { title: "如何用 Monaco 和 Babel 打造高性能 React-Playground", description: "分享如何实现一个 React 在线编辑器，使用 Monaco Editor 作为代码编辑器，Babel 进行 JSX 实时编译，支持本地文件引入和沙箱化预览。", readTime: "10 分钟" },
         { title: "MasterGo AI 生成设计图及代码", description: "介绍蓝湖 MasterGo 的 AI 生成设计图和代码工具，通过手绘图和文字描述快速生成页面设计和前端代码，解决无原型、无设计图的开发需求。", readTime: "5 分钟" },
         { title: "Three.js 中使用着色器绘制飞线", description: "详细讲解 Three.js 实现飞线效果的最佳实践，包括底线（轨道线）和飞线（动态线）的绘制，使用贝塞尔曲线和着色器实现流畅的飞线动画。", readTime: "12 分钟" },
